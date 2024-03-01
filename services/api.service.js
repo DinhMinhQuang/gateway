@@ -111,25 +111,7 @@ module.exports = {
 
 				// Enable/disable logging
 				logging: true,
-			},
-			{
-				mergeParams: false,
-				path: "/oAuth2/callback",
-				aliases: {
-					"GET /": [
-						async (ctx, req, res, next) => {
-							console.log(req);
-							console.log("Custom Middleware in Route");
-							next();
-						},
-						{
-							mappingPolicy: "all",
-							action: "v1.account.callBackOauth2",
-						}
-					]
-				},
-			},
-
+			}
 		],
 
 		// Do not log client side errors (does not log an error response when the error.code is 400<=X<500)

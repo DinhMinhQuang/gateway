@@ -5,17 +5,16 @@ const { MoleculerError } = require("moleculer").Errors;
 
 module.exports = async function (ctx, route, req, authHandler) {
 	let authConf = false;
-	if (_.has(req.$action.rest.auth)) {
+	if (_.get(req, "$action.rest.auth", null) !== null) {
 		authConf = req.$action.rest.auth;
 	}
 
-	if (_.has(route.opts.auth)) {
+	if (_.get(route, "opts.auth", null) !== null) {
 		authConf = route.opts.auth;
 	}
 	if (authConf === false) {
 		return { credentials: null, isValid: false };
 	}
-
 	if (_.isEmpty(authConf)) return { credentials: null, isValid: false };
 
 	let flagStop = false;
